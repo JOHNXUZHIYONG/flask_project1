@@ -7,4 +7,4 @@
 *.iml
 out
 gen
-../Quincus/config.py
+config.py
