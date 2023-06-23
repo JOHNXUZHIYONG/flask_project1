@@ -1,0 +1,55 @@
+{% extends 'base.html'%}
+
+
+{% block title%} pay {% endblock %}
+{% block style%}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/pay.css')}}">
+{%endblock%}
+
+{% block content %}
+    <div class="table-container">
+        <h1>Invoice</h1>
+
+        <table border="1">
+            <tr>
+                <th style="color:blue">Order_Id</th>
+                <th style="color:blue">Item</th>
+                <th style="color:blue">Price</th>
+                <th style="color:blue">Quantity</th>
+                <th style="color:blue">Subtotal</th>
+            </tr>
+            <tr>
+                <td>{{order_id}}</td>
+                <td>{{item1}}</td>
+                <td>{{price1}}</td>
+                <td>{{quantity1}}</td>
+                <td>{{sub1}}</td>
+            </tr>
+            <tr>
+                <td>{{order_id}}</td>
+                <td>{{item2}}</td>
+                <td>{{price2}}</td>
+                <td>{{quantity2}}</td>
+                <td>{{sub2}}</td>
+            </tr>
+            <tr>
+                <td>{{order_id}}</td>
+                <td>{{item3}}</td>
+                <td>{{price3}}</td>
+                <td>{{quantity3}}</td>
+                <td>{{sub3}}</td>
+            </tr>
+            <tr>
+                <th style="color:blue">Total</th>
+                <td>{{total}}</td>
+            </tr>
+
+
+            <tr>
+                <th style="color:blue">Pay</th>
+                <td><a href="{{url_for('shopping.invoice')}}"><button>Pay</button></a></td>
+            </tr>
+        </table>
+        </form>
+    </div>
+{%endblock%}

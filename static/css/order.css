@@ -1,0 +1,21 @@
+<style>
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .table-container {
+            margin: 0 420px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+</style>

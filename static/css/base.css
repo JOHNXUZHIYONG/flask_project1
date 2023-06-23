@@ -1,0 +1,22 @@
+/* 导航栏样式 */
+.navbar {
+  height: 50px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar a {
+
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+/* Logo 样式 */
+.logo img {
+  height: 50px;
+  width: auto;
+}

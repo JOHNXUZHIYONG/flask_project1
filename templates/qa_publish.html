@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{%block title%} Publish your questions {%endblock%}
+
+{%block style%}
+<!--<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/qa_publish.css')}}">-->
+{%endblock%}
+
+{%block content%}
+
+    <div class="form-container">
+        <form action="#" method="post">
+            <h1>Title</h1>
+            <input type="text" name='title' placeholder="Title">
+            <h1>Content</h1>
+            <input type="text" name='content' placeholder="Content">
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+{%endblock%}
+
+

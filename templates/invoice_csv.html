@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{%block title%}invoice_csv{%endblock%}
+
+
+{%block content%}
+    <div style="text-align: center;">
+        <h1>You have made the payment successfully !</h1>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="{{invoice_file}}" download="{{invoice_file}}">
+            <button>Download Invoice</button>
+        </a>
+    </div>
+{%endblock%}

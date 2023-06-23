@@ -1,0 +1,35 @@
+
+    /* 居中样式 */
+    body {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* 表单样式 */
+    .form-container {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .form-container h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .form-container input[type="text"],
+    .form-container input[type="password"] {
+      width: 450px;
+      padding: 50px;
+      margin-bottom: 10px;
+    }
+
+    .form-container input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
