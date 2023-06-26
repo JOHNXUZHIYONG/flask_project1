@@ -2,7 +2,7 @@
 
 {%block title%} Overwrite_invoice {%endblock%}
 {% block style%}
-<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/overwrite_invoice.css')}}">
+
 
 {%endblock%}
 
@@ -36,11 +36,18 @@
             </tr>
             <tr>
                 <th style="color:#e00">item</th>
-                <td><input type="text" name="item" value=""></td>
+                <td>
+                    <select name="item">
+                      <option disabled selected>item list</option>
+                      {% for item in item_list %}
+                      <option value="{{ item }}"> {{ item }} </option>
+                      {% endfor %}
+                    </select>
+
             </tr>
             <tr>
                 <th style="color:#e00">new_quantity</th>
-                <td><input type="text" name="new_quantity" value=""></td>
+                <td><input type="text" name="new_quantity" value="2" title="key in a number, e.g. 2"></td>
             </tr>
             <tr>
                 <th style="color:#e00">Submit</th>

@@ -157,6 +157,14 @@ def overwrite_invoice():
     if request.method == "POST":
         order_id = request.form.get('order_id')
         new_quantity = str(request.form.get('new_quantity'))
+        # 使用 try-except 验证输入数据类型是否为int
+        try:
+            new_quantity = int(new_quantity)
+            # 在这里处理验证通过的数据
+            # new_quantity 确保是一个整数
+        except ValueError:
+            return 'Invalid input. Quantity must be an integer.'
+
         item = request.form.get('item').lower()
         folder_path = 'D:/Python_project/newdemo/demo1/project1/static/csv/invoice'
 
@@ -167,24 +175,29 @@ def overwrite_invoice():
                 print('i am here')
                 print(filename)
                 with open(invoice_path, 'r', newline='') as file:
-                    print('i am here')
+
                     reader = csv.reader(file)
                     original_data = list(reader)
+                    length=len(original_data)
 
-                    print (original_data)
-                    if original_data[1][1] == item:
-                        original_data[1][3] = int(new_quantity)
-                        original_data[1][4] = int(new_quantity)*float(original_data[1][2])
-                        original_data[1][5] = float(original_data[1][4]) + float(original_data[2][4]) + float(original_data[3][4])
-                    elif original_data[2][1] == item:
-                        original_data[2][3] = int(new_quantity)
-                        original_data[2][4] = int(new_quantity)*float(original_data[2][2])
-                        original_data[1][5] = float(original_data[1][4]) + float(original_data[2][4]) + float(original_data[3][4])
+                    for i in range (1, length):
+                        if original_data[i][1] == item:
+                            original_quantity = int(original_data[i][3])
+                            original_data[i][3] = int(new_quantity)
+                            quantity_gap = original_data[i][3] - original_quantity
 
-                    elif original_data[3][1] == item:
-                        original_data[3][3] = int(new_quantity)
-                        original_data[3][4] = int(new_quantity)*float(original_data[3][2])
-                        original_data[1][5] = float(original_data[1][4]) + float(original_data[2][4]) + float(original_data[3][4])
+                            original_data[i][4] = int(new_quantity)*float(original_data[i][2])
+                            original_data[1][5] = float(original_data[1][5])+float(original_data[i][2])*quantity_gap
+                            break
+                        # elif original_data[2][1] == item:
+                        #     original_data[2][3] = int(new_quantity)
+                        #     original_data[2][4] = int(new_quantity)*float(original_data[2][2])
+                        #     original_data[1][5] = float(original_data[1][4]) + float(original_data[2][4]) + float(original_data[3][4])
+                        #
+                        # elif original_data[3][1] == item:
+                        #     original_data[3][3] = int(new_quantity)
+                        #     original_data[3][4] = int(new_quantity)*float(original_data[3][2])
+                        #     original_data[1][5] = float(original_data[1][4]) + float(original_data[2][4]) + float(original_data[3][4])
 
                     else:
                         return 'These is such item in the order.'
@@ -206,6 +219,6 @@ def overwrite_invoice():
             file_id = filename.split('_')[0]
 
             file_id_list.append(file_id)
-
+        item_list = ['tea','coffee','cocacola']
         print(file_id_list)
-        return render_template('overwrite_invoice.html', file_id_list=file_id_list)
+        return render_template('overwrite_invoice.html', file_id_list=file_id_list, item_list=item_list)
