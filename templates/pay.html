@@ -12,11 +12,11 @@
 
         <table border="1">
             <tr>
-                <th style="color:blue">Order_Id</th>
-                <th style="color:blue">Item</th>
-                <th style="color:blue">Price</th>
-                <th style="color:blue">Quantity</th>
-                <th style="color:blue">Subtotal</th>
+                <th >Order_Id</th>
+                <th >Item</th>
+                <th >Price</th>
+                <th >Quantity</th>
+                <th >Subtotal</th>
             </tr>
             <tr>
                 <td>{{order_id}}</td>
@@ -40,13 +40,13 @@
                 <td>{{sub3}}</td>
             </tr>
             <tr>
-                <th style="color:blue">Total</th>
+                <th >Total</th>
                 <td>{{total}}</td>
             </tr>
 
 
             <tr>
-                <th style="color:blue">Pay</th>
+                <th >Pay</th>
                 <td><a href="{{url_for('shopping.invoice')}}"><button>Pay</button></a></td>
             </tr>
         </table>

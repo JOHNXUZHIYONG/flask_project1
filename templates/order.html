@@ -6,61 +6,61 @@
 {%endblock%}
 
 {% block content %}
-<div class="container">
-    <div class="table-container">
-                <h2>Price List</h2>
+
+<div class="table-container">
+    <h1>Price List</h1>
+    <table border="1" id="table1">
+        <tr>
+            <th>Item</th>
+            <th>Price($)</th>
+        </tr>
+        <tr>
+            <td>{{item1}}</td>
+            <td>{{price1}}</td>
+        </tr>
+        <tr>
+            <td>{{item2}}</td>
+            <td>{{price2}}</td>
+        </tr>
+        <tr>
+            <td>{{item3}}</td>
+            <td>{{price3}}</td>
+        </tr>
+    </table>
+</div>
+<div class="table-container">
+    <h1>Order</h1>
+    <form action="#" method="post">
         <table border="1">
             <tr>
                 <th>Item</th>
-                <th>Price($)</th>
-            </tr>
-            <tr>
-                <td>{{item1}}</td>
-                <td>{{price1}}</td>
-            </tr>
-            <tr>
-                <td>{{item2}}</td>
-                <td>{{price2}}</td>
-            </tr>
-            <tr>
-                <td>{{item3}}</td>
-                <td>{{price3}}</td>
-            </tr>
-        </table>
-    </div>
-    <div class="table-container">
-        <h1>Order</h1>
-        <form action="#" method="post">
-        <table border="1">
-            <tr>
-                <th style="color:#e00">Item</th>
                 <td><input type="text" name="item1" value="" placeholder="item name"></td>
-                <th style="color:#e00">Quantity</th>
+                <th>Quantity</th>
                 <td><input type="number" name="quantity1" value="0" placeholder="item quantity"></td>
 
             </tr>
             <tr>
-                <th style="color:#e00">Item</th>
+                <th>Item</th>
                 <td><input type="text" name="item2" value="" placeholder="item name"></td>
-                <th style="color:#e00">Quantity</th>
+                <th>Quantity</th>
                 <td><input type="number" name="quantity2" value="0" placeholder="item quantity"></td>
 
             </tr>
             <tr>
-                <th style="color:#e00">Item</th>
+                <th>Item</th>
                 <td><input type="text" name="item3" value="" placeholder="item name"></td>
-                <th style="color:#e00">Quantity</th>
+                <th>Quantity</th>
                 <td><input type="number" name="quantity3" value="0" placeholder="item quantity"></td>
 
             </tr>
 
 
             <tr>
-                <th style="color:#e00">Submit</th>
+                <th>Submit</th>
                 <td><input type="submit" name="submit" value="Submit"></td>
             </tr>
         </table>
-        </form>
-    </div>
+    </form>
 </div>
+
 {% endblock %}

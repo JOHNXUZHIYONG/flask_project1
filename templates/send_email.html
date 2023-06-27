@@ -12,22 +12,29 @@
 <div>
     <h1>Send Email</h1>
     <form method="POST" action="/email/send_email" enctype="multipart/form-data">
-        <label for="sender">Sender：</label>
-        <input type="email" id="sender" name="sender" required><br><br>
-
-        <label for="receiver">Receiver：</label>
-        <input type="email" id="receiver" name="receiver" required><br><br>
-
-        <label for="subject">Topic：</label>
-        <input type="text" id="subject" name="subject" required><br><br>
-
-        <label for="message">Message：</label>
-        <textarea id="message" name="message" rows="5" required></textarea><br><br>
-
-        <label for="attachment">Attachment：</label>
-        <input type="file" id="attachment" name="attachment"><br><br>
-
-        <input type="submit" value="Send">
+        <table>
+            <tr>
+                <th><label for="sender">Sender：</label></th>
+                <td><input type="email" id="sender" name="sender" required></td>
+            </tr>
+            <tr>
+                <th><label for="receiver">Receiver：</label></th>
+                <td><input type="email" id="receiver" name="receiver" required></td>
+            </tr>
+            <tr>
+                <th><label for="subject">Topic：</label></th>
+                <td><input type="text" id="subject" name="subject" required></td>
+            </tr>
+            <tr>
+                <th><label for="message">Message：</label></th>
+                <td><textarea id="message" name="message" rows="5" required></textarea></td>
+            </tr>
+            <tr>
+                <th><label for="attachment">Attachment：</label></th>
+                <td><input type="file" id="attachment" name="attachment"></td>
+            </tr>
+        </table>
+        <input class='submit' type="submit" value="Send">
     </form>
 </div>
 {%endblock%}

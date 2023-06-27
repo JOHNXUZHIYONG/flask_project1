@@ -8,52 +8,59 @@
 
 
 {%block content%}
-    <div class="table-container">
-<!--        <table>-->
-<!--            <tr>-->
-<!--                <th>order id list</th>-->
-<!--            </tr>-->
-<!--            {%for file_id in file_id_list%}-->
-<!--            <tr>-->
-<!--                <td>{{file_id}}</td>-->
-<!--            </tr>-->
-<!--            {%endfor%}-->
-<!--        </table>-->
+<div class="table-container">
+    <!--        <table>-->
+    <!--            <tr>-->
+    <!--                <th>order id list</th>-->
+    <!--            </tr>-->
+    <!--            {%for file_id in file_id_list%}-->
+    <!--            <tr>-->
+    <!--                <td>{{file_id}}</td>-->
+    <!--            </tr>-->
+    <!--            {%endfor%}-->
+    <!--        </table>-->
 
-        <h1>overwrite_invoice</h1>
-        <form action="#" method="post">
+    <h1>overwrite_invoice</h1>
+    <form action="#" method="post">
         <table border="1">
             <tr>
-                <th style="color:#e00">order_id</th>
+                <th>order_id</th>
                 <td>
-                    <select name="order_id">
-                      <option disabled selected>order id list</option>
-                      {% for file_id in file_id_list %}
-                      <option value="{{ file_id }}"> {{ file_id }} </option>
-                      {% endfor %}
+                    <select name="order_id" required="required">
+                        <option value="">order id list</option>
+                        {% for file_id in file_id_list %}
+                        <option value="{{ file_id }}"> {{ file_id }}</option>
+                        {% endfor %}
                     </select>
+                </td>
 
             </tr>
             <tr>
-                <th style="color:#e00">item</th>
+                <th>item</th>
                 <td>
-                    <select name="item">
-                      <option disabled selected>item list</option>
-                      {% for item in item_list %}
-                      <option value="{{ item }}"> {{ item }} </option>
-                      {% endfor %}
+                    <select name="item" required>
+                        <option value="">item list</option>
+                        <!--                        <option disabled selected>item list</option>-->
+                        会导致页面无法自动提供表单验证，即提示至少要选择一个选项
+                        {% for item in item_list %}
+                        <option value="{{ item }}"> {{ item }}</option>
+                        {% endfor %}
+
                     </select>
+                </td>
+
 
             </tr>
             <tr>
-                <th style="color:#e00">new_quantity</th>
-                <td><input type="text" name="new_quantity" value="2" title="key in a number, e.g. 2"></td>
+                <th>new_quantity</th>
+                <td><input type="text" name="new_quantity" value="2" title="key in a number, e.g. 2"
+                           pattern="[0-9]{1,4}" required></td>
             </tr>
-            <tr>
-                <th style="color:#e00">Submit</th>
-                <td><input type="submit" name="submit" value="Submit"></td>
-            </tr>
+
+
         </table>
-        </form>
-    </div>
+        <input class='submit' type="submit" name="submit" value="Submit">
+    </form>
+</div>
+<h1 style="color:red;">{{error_message}}</h1>
 {%endblock%}

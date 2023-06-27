@@ -9,12 +9,12 @@ from datetime import datetime
 bp = Blueprint('shopping', __name__, url_prefix='/shopping')
 
 
-@bp.route('/order', methods=['GET','POST'])
+@bp.route('/order', methods=['GET', 'POST'])
 def order():
-    #add price list into db
+    # add price list into db
 
-    items=['tea','coffee','cocacola']
-    prices=[1,2,3]
+    items = ['tea', 'coffee', 'cocacola']
+    prices = [1, 2, 3]
 
     price_list1 = PriceList(item=items[0], price=prices[0])
     price_list2 = PriceList(item=items[1], price=prices[1])
@@ -23,7 +23,7 @@ def order():
     db.session.add_all([price_list1, price_list2, price_list3])
     db.session.commit()
 
-    #from db get price data
+    # from db get price data
     price1 = PriceList.query.filter_by(item=items[0]).order_by(PriceList.id.desc()).first().price
     price2 = PriceList.query.filter_by(item=items[1]).order_by(PriceList.id.desc()).first().price
     price3 = PriceList.query.filter_by(item=items[2]).order_by(PriceList.id.desc()).first().price
@@ -32,35 +32,36 @@ def order():
     item3 = PriceList.query.filter_by(item=items[2]).first().item
 
     if request.method == 'GET':
-        return render_template('order.html',item1=item1, price1=price1,item2=item2,price2=price2,item3=item3,price3=price3)
+        return render_template('order.html', item1=item1, price1=price1, item2=item2, price2=price2, item3=item3,
+                               price3=price3)
 
     else:
         item1 = request.form.get('item1')
-        quantity1=int(request.form.get('quantity1'))
-        price1=prices[0]
+        quantity1 = int(request.form.get('quantity1'))
+        price1 = prices[0]
         item2 = request.form.get('item2')
-        quantity2=int(request.form.get('quantity2'))
-        price2=prices[1]
+        quantity2 = int(request.form.get('quantity2'))
+        price2 = prices[1]
         item3 = request.form.get('item3')
-        quantity3=int(request.form.get('quantity3'))
-        price3=prices[2]
+        quantity3 = int(request.form.get('quantity3'))
+        price3 = prices[2]
 
-        total_price=price1*quantity1+price2*quantity2+price3*quantity3
+        total_price = price1 * quantity1 + price2 * quantity2 + price3 * quantity3
 
-        c_order = Order(item1=item1,item2=item2,item3=item3,price1=price1,price2=price2,price3=price3,
-                        quantity1=quantity1,quantity2=quantity2,quantity3=quantity3,total_price=total_price)
+        c_order = Order(item1=item1, item2=item2, item3=item3, price1=price1, price2=price2, price3=price3,
+                        quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, total_price=total_price)
         db.session.add(c_order)
         db.session.commit()
 
         return redirect(url_for('shopping.pay'))
 
 
-@bp.route('/pay', methods=['GET','POST'])
+@bp.route('/pay', methods=['GET', 'POST'])
 def pay():
     if request.method == 'GET':
         pay_order = Order.query.order_by(Order.id.desc()).first()
         order_id = pay_order.id
-        item1=pay_order.item1
+        item1 = pay_order.item1
         item2 = pay_order.item2
         item3 = pay_order.item3
         price1 = pay_order.price1
@@ -69,20 +70,22 @@ def pay():
         quantity1 = pay_order.quantity1
         quantity2 = pay_order.quantity2
         quantity3 = pay_order.quantity3
-        sub1=price1*quantity1
-        sub2=price2*quantity2
-        sub3=price3*quantity3
+        sub1 = price1 * quantity1
+        sub2 = price2 * quantity2
+        sub3 = price3 * quantity3
         total = pay_order.total_price
 
-        return render_template('pay.html', item1=item1, item2=item2,item3=item3,price1=price1,price2=price2,price3=price3,
-                               quantity1=quantity1,quantity2=quantity2,quantity3=quantity3,total=total,order_id=order_id,
-                                sub1=sub1,sub2=sub2,sub3=sub3)
+        return render_template('pay.html', item1=item1, item2=item2, item3=item3, price1=price1, price2=price2,
+                               price3=price3,
+                               quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, total=total,
+                               order_id=order_id,
+                               sub1=sub1, sub2=sub2, sub3=sub3)
     else:
         return render_template('order.html')
 
-@bp.route('/invoice', methods=['GET','POST'])
-def invoice():
 
+@bp.route('/invoice', methods=['GET', 'POST'])
+def invoice():
     # 处理数据
     pay_order = Order.query.order_by(Order.id.desc()).first()
     order_id = pay_order.id
@@ -100,7 +103,6 @@ def invoice():
     sub3 = price3 * quantity3
     total = pay_order.total_price
 
-
     invoice_template_folder = 'D:/Python_project/newdemo/demo1/project1/static/csv/invoice_template'  # csv1 文件夹的路径
     invoice_folder = 'D:/Python_project/newdemo/demo1/project1/static/csv/invoice'  # 新的文件夹路径
     csv1_folder = invoice_template_folder
@@ -117,27 +119,24 @@ def invoice():
     invoice_file = f'{order_id}_csv{timestamp}.csv'
     csv2_path = invoice_path
 
-    shutil.copyfile(csv1_path, csv2_path) # 复制 csv1 文件到新的文件夹作为 csv2
-
+    shutil.copyfile(csv1_path, csv2_path)  # 复制 csv1 文件到新的文件夹作为 csv2
 
     with open(csv2_path, 'r', newline='') as file:
         reader = csv.reader(file)
         data1 = list(reader)
         data1 = data1[0]
 
-
     data = []
     data.append(data1)
     if quantity1 != 0:
-        data.append([order_id,item1,price1,quantity1,sub1])
+        data.append([order_id, item1, price1, quantity1, sub1])
     if quantity2 != 0:
-        data.append([order_id,item2,price2,quantity2,sub2])
+        data.append([order_id, item2, price2, quantity2, sub2])
     if quantity3 != 0:
-        data.append([order_id,item3,price3,quantity3,sub3])
+        data.append([order_id, item3, price3, quantity3, sub3])
     data[1].append(total)
 
     # 4. 将数据填充到生成的 CSV 文件中
-
 
     with open(csv2_path, 'w', newline='') as file:
         writer = csv.writer(file)
@@ -146,14 +145,12 @@ def invoice():
 
     invoice_file = url_for('static', filename='csv/invoice/' + invoice_file)
 
+    return render_template('invoice_csv.html', invoice_file=invoice_file)
 
 
-
-    return render_template('invoice_csv.html' ,invoice_file=invoice_file)
-
-@bp.route('/overwrite_invoice', methods=['GET','POST'])
+@bp.route('/overwrite_invoice', methods=['GET', 'POST'])
 def overwrite_invoice():
-
+    item_list = ['tea', 'coffee', 'cocacola']
     if request.method == "POST":
         order_id = request.form.get('order_id')
         new_quantity = str(request.form.get('new_quantity'))
@@ -163,9 +160,10 @@ def overwrite_invoice():
             # 在这里处理验证通过的数据
             # new_quantity 确保是一个整数
         except ValueError:
-            return 'Invalid input. Quantity must be an integer.'
+            error_message = 'Invalid input. Quantity must be an integer.'
+            return render_template('overwrite_invoice.html', error_message=error_message)
 
-        item = request.form.get('item').lower()
+        item = request.form.get('item')
         folder_path = 'D:/Python_project/newdemo/demo1/project1/static/csv/invoice'
 
         for filename in os.listdir(folder_path):
@@ -178,16 +176,16 @@ def overwrite_invoice():
 
                     reader = csv.reader(file)
                     original_data = list(reader)
-                    length=len(original_data)
+                    length = len(original_data)
 
-                    for i in range (1, length):
+                    for i in range(1, length):
                         if original_data[i][1] == item:
                             original_quantity = int(original_data[i][3])
                             original_data[i][3] = int(new_quantity)
                             quantity_gap = original_data[i][3] - original_quantity
 
-                            original_data[i][4] = int(new_quantity)*float(original_data[i][2])
-                            original_data[1][5] = float(original_data[1][5])+float(original_data[i][2])*quantity_gap
+                            original_data[i][4] = int(new_quantity) * float(original_data[i][2])
+                            original_data[1][5] = float(original_data[1][5]) + float(original_data[i][2]) * quantity_gap
                             break
                         # elif original_data[2][1] == item:
                         #     original_data[2][3] = int(new_quantity)
@@ -200,7 +198,11 @@ def overwrite_invoice():
                         #     original_data[1][5] = float(original_data[1][4]) + float(original_data[2][4]) + float(original_data[3][4])
 
                     else:
-                        return 'These is such item in the order.'
+                        error_message = 'Select an item please!'
+                        file_id_list = get_file_id_list()
+
+                        return render_template('overwrite_invoice.html', file_id_list=file_id_list, item_list=item_list,
+                                               error_message=error_message)
 
                 new_data = original_data
                 with open(invoice_path, 'w', newline='') as file:
@@ -211,14 +213,23 @@ def overwrite_invoice():
                 return render_template('send_email.html')
                 break
         else:
-            return 'Invoice does not exit! Check Order ID again.'
-    else:
-        folder_path = 'D:/Python_project/newdemo/demo1/project1/static/csv/invoice'
-        file_id_list = []
-        for filename in os.listdir(folder_path):
-            file_id = filename.split('_')[0]
+            error_message = 'Select a order ID please!'
+            file_id_list = get_file_id_list()
 
-            file_id_list.append(file_id)
-        item_list = ['tea','coffee','cocacola']
-        print(file_id_list)
+            return render_template('overwrite_invoice.html', file_id_list=file_id_list, item_list=item_list,
+                                   error_message=error_message)
+
+    else:
+
+        file_id_list = get_file_id_list()
         return render_template('overwrite_invoice.html', file_id_list=file_id_list, item_list=item_list)
+
+
+def get_file_id_list():
+    folder_path = 'D:/Python_project/newdemo/demo1/project1/static/csv/invoice'
+    file_id_list = []
+
+    for filename in os.listdir(folder_path):
+        file_id = filename.split('_')[0]
+        file_id_list.append(file_id)
+    return file_id_list
