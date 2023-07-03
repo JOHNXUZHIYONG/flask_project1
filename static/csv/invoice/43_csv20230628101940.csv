@@ -1,0 +1,4 @@
+﻿id,item,price($),quantity,sub_total($),total($)
+43,tea,1.0,1,1.0,6.0
+43,coffee,2.0,1,2.0
+43,cocacola,3.0,1,3.0

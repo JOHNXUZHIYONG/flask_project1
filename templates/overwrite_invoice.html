@@ -9,16 +9,6 @@
 
 {%block content%}
 <div class="table-container">
-    <!--        <table>-->
-    <!--            <tr>-->
-    <!--                <th>order id list</th>-->
-    <!--            </tr>-->
-    <!--            {%for file_id in file_id_list%}-->
-    <!--            <tr>-->
-    <!--                <td>{{file_id}}</td>-->
-    <!--            </tr>-->
-    <!--            {%endfor%}-->
-    <!--        </table>-->
 
     <h1>overwrite_invoice</h1>
     <form action="#" method="post">
@@ -53,7 +43,8 @@
             </tr>
             <tr>
                 <th>new_quantity</th>
-                <td><input type="text" name="new_quantity" value="2" title="key in a number, e.g. 2"
+                <td><input type="text" name="new_quantity" value="2" placeholder="key in a number, e.g. 2"
+                           title="key in a number, e.g. 2"
                            pattern="[0-9]{1,4}" required></td>
             </tr>
 
