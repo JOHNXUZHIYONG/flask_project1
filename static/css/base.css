@@ -1,5 +1,5 @@
 /* 导航栏样式 */
-.navbar {
+.navbar{
   height: 50px;
   background-color: #333;
   color: #fff;
@@ -10,7 +10,8 @@
 
 }
 
-.navbar a {
+
+.navbar a{
   display: inline-block;
   border:2px solid green;
   padding: 10px 25px;
@@ -38,6 +39,7 @@
 .table-container {
     margin-left: auto;
     margin-right: auto;
+    border-radius:5px;
     /* 这会使容器元素水平居中 */
     max-width: 800px;
     /* 设置容器元素的最大宽度，可以根据需要进行调整 */
@@ -45,11 +47,14 @@
 }
 
 
+
 table {    margin-left: auto;
     margin-right: auto;
     /* 这会使容器元素水平居中 */
             border-collapse: collapse;
-            width: 30%;
+            border-radius:5px;
+            width: auto;
+            table-layout: fixed;
 
         }
 
@@ -58,13 +63,20 @@ th {        color: black;
             background-color: DodgerBlue;
             padding: 12px;
             text-align: center;
-
+            width: 100px
             border:2px solid black;
+
         }
 td {color: black;
             padding: 8px;
             text-align: left;
             border: 1px solid black;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            width: 200px
 
 }
 p, h1, h2 {text-align: center;}
@@ -76,5 +88,42 @@ p, h1, h2 {text-align: center;}
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  margin: 10px;}
+  margin: 30px;
+  width:auto;
+  height:auto;
+  text-decoration:none;}
 
+.submit a:hover {
+  background-color: green;
+}
+
+.footer{
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: -150px;
+
+}
+
+.contact {display: block;
+}
+
+.about {display: flex;
+justify-content: center;
+  align-items: center;}
+
+.about li{display: inline-block;
+list-style: none;}
+
+.footer a{text-decoration:none;
+height:40px;
+width:80px;
+text-align:center;
+color: white;
+background-color: gray;
+border: 2px solid black;
+border-radius:5px;
+line-height:40px;
+display: block;}
+
+.footer a:hover{background: green;}

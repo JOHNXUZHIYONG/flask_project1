@@ -8,48 +8,48 @@
 
 {% block content %}
     <div class="table-container">
-        <h1>Invoice</h1>
+        <h1>Verification</h1>
 
         <table border="1">
             <tr>
-                <th >Order_Id</th>
-                <th >Item</th>
-                <th >Price</th>
-                <th >Quantity</th>
-                <th >Subtotal</th>
+                <th>ID</th>
+                <th>Part</th>
+                <th>Status</th>
+                <th>Sentencing Time</th>
+                <th>Laser Sanner</th>
             </tr>
             <tr>
                 <td>{{order_id}}</td>
                 <td>{{item1}}</td>
-                <td>{{price1}}</td>
-                <td>{{quantity1}}</td>
-                <td>{{sub1}}</td>
+                <td>{{status1}}</td>
+                <td>{{sentencing_time1}}</td>
+                <td>{{laser_scanner1}}</td>
             </tr>
-            <tr>
-                <td>{{order_id}}</td>
-                <td>{{item2}}</td>
-                <td>{{price2}}</td>
-                <td>{{quantity2}}</td>
-                <td>{{sub2}}</td>
-            </tr>
-            <tr>
-                <td>{{order_id}}</td>
-                <td>{{item3}}</td>
-                <td>{{price3}}</td>
-                <td>{{quantity3}}</td>
-                <td>{{sub3}}</td>
-            </tr>
-            <tr>
-                <th >Total</th>
-                <td>{{total}}</td>
-            </tr>
+<!--            <tr>-->
+<!--                <td>{{order_id}}</td>-->
+<!--                <td>{{item2}}</td>-->
+<!--                <td>{{price2}}</td>-->
+<!--                <td>{{quantity2}}</td>-->
+<!--                <td>{{sub2}}</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>{{order_id}}</td>-->
+<!--                <td>{{item3}}</td>-->
+<!--                <td>{{price3}}</td>-->
+<!--                <td>{{quantity3}}</td>-->
+<!--                <td>{{sub3}}</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <th >Total</th>-->
+<!--                <td>{{total}}</td>-->
+<!--            </tr>-->
 
 
-            <tr>
-                <th >Pay</th>
-                <td><a href="{{url_for('shopping.invoice')}}"><button>Pay</button></a></td>
-            </tr>
+
+
         </table>
+        <form action="#" method="post">
+        <input class='submit' type="submit" name="verify" value="Verify">
         </form>
     </div>
 {%endblock%}

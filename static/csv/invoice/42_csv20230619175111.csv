@@ -1,4 +1,0 @@
-﻿id,item,price($),quantity,sub_total($),total($)
-42,tea,1.0,2,2.0,9.0
-42,coffee,2.0,2,4.0
-42,cocacola,3.0,1,3.0

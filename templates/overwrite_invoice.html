@@ -26,27 +26,25 @@
 
             </tr>
             <tr>
-                <th>item</th>
+                <th>new scanner</th>
                 <td>
-                    <select name="item" required>
+                    <select name="new_scanner" required>
                         <option value="">item list</option>
                         <!--                        <option disabled selected>item list</option>-->
                         会导致页面无法自动提供表单验证，即提示至少要选择一个选项
-                        {% for item in item_list %}
-                        <option value="{{ item }}"> {{ item }}</option>
+                        {% for scanner in laser_scanner_list %}
+                        <option value="{{ scanner }}"> {{ scanner }}</option>
                         {% endfor %}
 
                     </select>
                 </td>
-
-
             </tr>
-            <tr>
-                <th>new_quantity</th>
-                <td><input type="text" name="new_quantity" value="2" placeholder="key in a number, e.g. 2"
-                           title="key in a number, e.g. 2"
-                           pattern="[0-9]{1,4}" required></td>
-            </tr>
+<!--            <tr>-->
+<!--                <th>new_quantity</th>-->
+<!--                <td><input type="text" name="new_quantity" value="2" placeholder="key in a number, e.g. 2"-->
+<!--                           title="key in a number, e.g. 2"-->
+<!--                           pattern="[0-9]{1,4}" required></td>-->
+<!--            </tr>-->
 
 
         </table>

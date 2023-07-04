@@ -6,53 +6,73 @@
 {%endblock%}
 
 {% block content %}
+<div style=" display: block;">
+<div style="display: flex; justify-content: center;">
+        <img src="../static/img/dimension_measurement.png" alt="dimension_measurement" width="800px" height="auto" >
+    </div>
+<div class="table-container" id="active_work_order">
 
-<div class="table-container">
-    <h1>Price List</h1>
+
+    <h1>Active Work Order List</h1>
     <table border="1" id="table1">
+
         <tr>
-            <th>Item</th>
-            <th>Price($)</th>
+            <th>ID</th>
+            <th>Part</th>
+            <th>Status</th>
+            <th>Sentencing Time</th>
+            <th>Laser Sanner</th>
+
         </tr>
+
+        {% for order in work_order %}
         <tr>
-            <td>{{item1}}</td>
-            <td>{{price1}}</td>
+            <td>{{order.id}}</td>
+            <td>{{order.item1}}</td>
+            <td>{{order.status1}}</td>
+            <td>{{order.sentencing_time1}}</td>
+            <td>{{order.laser_scanner1}}</td>
         </tr>
-        <tr>
-            <td>{{item2}}</td>
-            <td>{{price2}}</td>
-        </tr>
-        <tr>
-            <td>{{item3}}</td>
-            <td>{{price3}}</td>
-        </tr>
+        {% endfor %}
+
     </table>
 </div>
 <div class="table-container">
-    <h1>Order</h1>
+    <h1>Work Order Creation</h1>
     <form action="#" method="post">
         <table border="1">
             <tr>
-                <th>Item</th>
-                <td><input type="text" name="item1" value="" placeholder="item name"></td>
-                <th>Quantity</th>
-                <td><input type="number" name="quantity1" value="0" placeholder="item quantity"></td>
-
+                <th>Part</th>
+                <td><input type="text" name="part1" value="" placeholder="part name" required></td>
+<!--                <th>Quantity</th>-->
+<!--                <td><input type="number" name="quantity1" value="0" placeholder="item quantity"></td>-->
             </tr>
             <tr>
-                <th>Item</th>
-                <td><input type="text" name="item2" value="" placeholder="item name"></td>
-                <th>Quantity</th>
-                <td><input type="number" name="quantity2" value="0" placeholder="item quantity"></td>
-
+                <th>Laser Scanner</th>
+                <td>
+                    <select name="scanner1" required="required">
+                        <option value="">Laser Scanner List</option>
+                        {% for scanner1 in laser_scanner_list %}
+                        <option value="{{ scanner1 }}"> {{ scanner1 }}</option>
+                        {% endfor %}
+                    </select>
             </tr>
-            <tr>
-                <th>Item</th>
-                <td><input type="text" name="item3" value="" placeholder="item name"></td>
-                <th>Quantity</th>
-                <td><input type="number" name="quantity3" value="0" placeholder="item quantity"></td>
 
-            </tr>
+<!--            -->
+<!--            <tr>-->
+<!--                <th>Item</th>-->
+<!--                <td><input type="text" name="item2" value="" placeholder="item name"></td>-->
+<!--                <th>Quantity</th>-->
+<!--                <td><input type="number" name="quantity2" value="0" placeholder="item quantity"></td>-->
+
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <th>Item</th>-->
+<!--                <td><input type="text" name="item3" value="" placeholder="item name"></td>-->
+<!--                <th>Quantity</th>-->
+<!--                <td><input type="number" name="quantity3" value="0" placeholder="item quantity"></td>-->
+
+<!--            </tr>-->
 
 
             <tr>
@@ -61,6 +81,7 @@
             </tr>
         </table>
     </form>
+</div>
 </div>
 
 {% endblock %}

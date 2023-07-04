@@ -14,6 +14,7 @@ bp=Blueprint('email',__name__,url_prefix='/email')
 def send_email():
     if request.method == 'POST':
         # 获取表单数据
+        factor = 1
         sender = request.form['sender']
         receiver = request.form['receiver']
         subject = request.form['subject']
@@ -55,7 +56,8 @@ def send_email():
 
             # 发送邮件
             server.send_message(msg)
-
-        return f'Email has been sent to {receiver} successfully！'
+        result = f'Email has been sent to {receiver} successfully！'
+        return render_template('send_email.html', factor=factor, result=result)
     else:
-        return render_template('send_email.html')
+        factor = 2
+        return render_template('send_email.html', factor=factor)
