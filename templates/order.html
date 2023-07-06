@@ -6,38 +6,9 @@
 {%endblock%}
 
 {% block content %}
-<div style=" display: block;">
+<div >
 <div style="display: flex; justify-content: center;">
         <img src="../static/img/dimension_measurement.png" alt="dimension_measurement" width="800px" height="auto" >
-    </div>
-<div class="table-container" id="active_work_order">
-
-
-    <h1>Active Work Order List</h1>
-    <table border="1" id="table1">
-
-        <tr>
-            <th>ID</th>
-            <th>Part ID</th>
-            <th>Part</th>
-            <th>Status</th>
-            <th>Sentencing Time</th>
-            <th>Laser Sanner</th>
-
-        </tr>
-
-        {% for order in work_order %}
-        <tr>
-            <td>{{order.id}}</td>
-            <td>{{order.part_id}}</td>
-            <td>{{order.item1}}</td>
-            <td>{{order.status1}}</td>
-            <td>{{order.sentencing_time1}}</td>
-            <td>{{order.laser_scanner1}}</td>
-        </tr>
-        {% endfor %}
-
-    </table>
 </div>
 <div class="table-container">
     <h1>Work Order Creation</h1>

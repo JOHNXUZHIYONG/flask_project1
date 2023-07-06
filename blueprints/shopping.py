@@ -10,36 +10,22 @@ import pandas
 bp = Blueprint('shopping', __name__, url_prefix='/shopping')
 
 
+@bp.route('/active_work_order')
+def active_work_order():
+
+    work_order = Order.query.order_by(Order.id.desc()).limit(10).all()
+    return render_template('active_work_order.html', work_order=work_order)
+
 @bp.route('/order', methods=['GET', 'POST'])
 def order():
-    # # add price list into db
-    #
-    # items = ['part1', 'part2', 'part3']
-    # # prices = [1, 2, 3]
-    # statuses = ['Sentencing', 'Verification', 'Final Inspection']
-    #
-    # work_list1 = PriceList(item=items[0], status=statuses[0])
-    # work_list2 = PriceList(item=items[1], status=statuses[1])
-    # work_list3 = PriceList(item=items[2], status=statuses[2])
-    #
-    # db.session.add_all([work_list1, work_list2, work_list3])
-    # db.session.commit()
-    #
-    # # from db get price data
-    # price1 = PriceList.query.filter_by(item=items[0]).order_by(PriceList.id.desc()).first().price
-    # price2 = PriceList.query.filter_by(item=items[1]).order_by(PriceList.id.desc()).first().price
-    # price3 = PriceList.query.filter_by(item=items[2]).order_by(PriceList.id.desc()).first().price
-    # item1 = PriceList.query.filter_by(item=items[0]).first().item
-    # item2 = PriceList.query.filter_by(item=items[1]).first().item
-    # item3 = PriceList.query.filter_by(item=items[2]).first().item
 
-    work_order = Order.query.order_by(Order.id.desc()).limit(5).all()
+    # work_order = Order.query.order_by(Order.id.desc()).limit(5).all()
     laser_scanner_list = ['RulerX 10', 'RulerX 20', 'RulerX 70', 'RulerXC 10', 'RulerXC 20', 'RulerXC 70', ]
     prepared_by_list = ['John', 'Ben', 'Linda']
     approved_by_list = ['John1', 'Ben1', 'Linda1']
 
     if request.method == 'GET':
-        return render_template('order.html', work_order=work_order, laser_scanner_list=laser_scanner_list,
+        return render_template('order.html', laser_scanner_list=laser_scanner_list,
                                prepared_by_list=prepared_by_list, approved_by_list=approved_by_list)
 
     else:

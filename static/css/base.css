@@ -1,3 +1,12 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
 /* 导航栏样式 */
 .navbar{
   height: 50px;
@@ -52,12 +61,17 @@ table {    margin-left: auto;
     margin-right: auto;
     /* 这会使容器元素水平居中 */
             border-collapse: collapse;
-            border-radius:5px;
+
             width: auto;
             table-layout: fixed;
 
         }
-
+#active_work_order {position: relative;}
+#table1 {position: relative;
+        right: 0px;
+        top:0px;
+        overflow: auto;
+        }
 
 th {        color: black;
             background-color: DodgerBlue;
@@ -65,6 +79,7 @@ th {        color: black;
             text-align: center;
             width: 100px
             border:2px solid black;
+
 
         }
 td {color: black;

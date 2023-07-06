@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title%} work_order_creation {% endblock %}
+{% block style%}
+
+{%endblock%}
+
+{% block content %}
+
+
+<div class="table-container" id="active_work_order">
+
+
+    <h1>Active Work Order List</h1>
+    <table border="1" id="table1" >
+
+        <tr>
+            <th>ID</th>
+            <th>Part ID</th>
+            <th>Part</th>
+            <th>Status</th>
+            <th>Sentencing Time</th>
+            <th>Laser Sanner</th>
+
+        </tr>
+
+        {% for order in work_order %}
+        <tr>
+            <td>{{order.id}}</td>
+            <td>{{order.part_id}}</td>
+            <td>{{order.item1}}</td>
+            <td>{{order.status1}}</td>
+            <td>{{order.sentencing_time1}}</td>
+            <td>{{order.laser_scanner1}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+
+{% endblock %}
