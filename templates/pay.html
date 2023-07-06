@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 
 
-{% block title%} pay {% endblock %}
+{% block title%} Verification {% endblock %}
 {% block style%}
 
 {%endblock%}
@@ -13,6 +13,7 @@
         <table border="1">
             <tr>
                 <th>ID</th>
+                <th>Part ID</th>
                 <th>Part</th>
                 <th>Status</th>
                 <th>Sentencing Time</th>
@@ -20,32 +21,12 @@
             </tr>
             <tr>
                 <td>{{order_id}}</td>
+                <td>{{part_id}}</td>
                 <td>{{item1}}</td>
                 <td>{{status1}}</td>
                 <td>{{sentencing_time1}}</td>
                 <td>{{laser_scanner1}}</td>
             </tr>
-<!--            <tr>-->
-<!--                <td>{{order_id}}</td>-->
-<!--                <td>{{item2}}</td>-->
-<!--                <td>{{price2}}</td>-->
-<!--                <td>{{quantity2}}</td>-->
-<!--                <td>{{sub2}}</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>{{order_id}}</td>-->
-<!--                <td>{{item3}}</td>-->
-<!--                <td>{{price3}}</td>-->
-<!--                <td>{{quantity3}}</td>-->
-<!--                <td>{{sub3}}</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th >Total</th>-->
-<!--                <td>{{total}}</td>-->
-<!--            </tr>-->
-
-
-
 
         </table>
         <form action="#" method="post">

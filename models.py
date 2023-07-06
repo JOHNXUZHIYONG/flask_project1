@@ -27,6 +27,11 @@ class PriceList(db.Model):
 class Order(db.Model):
     __tablename__='order'
     id = db.Column(db.Integer, primary_key=True, autoincrement= True)
+    sale_order_id = db.Column(db.String(100), nullable = False)
+    part_number_id = db.Column(db.String(100), nullable = False)
+    part_id = db.Column(db.String(100), nullable = False)
+    prepared_by = db.Column(db.String(100), nullable = False)
+    approved_by = db.Column(db.String(100), nullable = False)
     item1 = db.Column(db.String(100), nullable = False)
     status1 = db.Column(db.String(100), nullable = False)
     laser_scanner1 = db.Column(db.String(100), nullable=False)

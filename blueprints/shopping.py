@@ -5,6 +5,7 @@ import os
 import csv
 import shutil
 from datetime import datetime
+import pandas
 
 bp = Blueprint('shopping', __name__, url_prefix='/shopping')
 
@@ -34,48 +35,28 @@ def order():
 
     work_order = Order.query.order_by(Order.id.desc()).limit(5).all()
     laser_scanner_list = ['RulerX 10', 'RulerX 20', 'RulerX 70', 'RulerXC 10', 'RulerXC 20', 'RulerXC 70', ]
-
-    # print(work_order)
-    # work_order_id = work_order.id
-    # print(work_order_id)
-    # item1 = work_order.item1
-    # item2 = work_order.item2
-    # item3 = work_order.item3
-    # price1 = work_order.price1
-    # price2 = work_order.price2
-    # price3 = work_order.price3
-    # quantity1 = work_order.quantity1
-    # quantity2 = work_order.quantity2
-    # quantity3 = work_order.quantity3
-    # sub1 = price1 * quantity1
-    # sub2 = price2 * quantity2
-    # sub3 = price3 * quantity3
-    # total = work_order.total_price
+    prepared_by_list = ['John', 'Ben', 'Linda']
+    approved_by_list = ['John1', 'Ben1', 'Linda1']
 
     if request.method == 'GET':
-        return render_template('order.html', work_order=work_order, laser_scanner_list=laser_scanner_list)
-        # return render_template('order.html', item1=item1, price1=price1, item2=item2, price2=price2, item3=item3,
-        #                        price3=price3)
+        return render_template('order.html', work_order=work_order, laser_scanner_list=laser_scanner_list,
+                               prepared_by_list=prepared_by_list, approved_by_list=approved_by_list)
 
     else:
-        item1 = request.form.get('part1')
-        # quantity1 = int(request.form.get('quantity1'))
-        # price1 = prices[0]
-        # item2 = request.form.get('item2')
-        # quantity2 = int(request.form.get('quantity2'))
-        # price2 = prices[1]
-        # item3 = request.form.get('item3')
-        # quantity3 = int(request.form.get('quantity3'))
-        # price3 = prices[2]
+        sale_order_id = request.form.get('sale_order_id')
+        part_number_id = request.form.get('part_number_id')
+        part_id = request.form.get('part_id')
+        item1 = request.form.get('item1')
         laser_scanner1 = request.form.get('scanner1')
+        prepared_by = request.form.get('prepared_by')
+        approved_by = request.form.get('approved_by')
         status1 = 'sentencing'
         date_time = datetime.now()
         sentencing_time1 = date_time.strftime("%Y-%m-%d %H:%M:%S")
-        # total_price = price1 * quantity1 + price2 * quantity2 + price3 * quantity3
 
-        # c_order = Order(item1=item1, item2=item2, item3=item3, price1=price1, price2=price2, price3=price3,
-        #                 quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, total_price=total_price)
-        w_order = Order(item1=item1, status1=status1, sentencing_time1=sentencing_time1, laser_scanner1=laser_scanner1)
+        w_order = Order(sale_order_id=sale_order_id, part_number_id=part_number_id, part_id=part_id, item1=item1,
+                        status1=status1, sentencing_time1=sentencing_time1, laser_scanner1=laser_scanner1,
+                        prepared_by=prepared_by, approved_by=approved_by)
         db.session.add(w_order)
         db.session.commit()
 
@@ -88,24 +69,13 @@ def pay():
     order_id = work_order.id
     item1 = work_order.item1
     status1 = work_order.status1
+    part_id = work_order.part_id
 
     sentencing_time1 = work_order.sentencing_time1
 
     laser_scanner1 = work_order.laser_scanner1
-    # item2 = work_order.item2
-    # item3 = work_order.item3
-    # price1 = work_order.price1
-    # price2 = work_order.price2
-    # price3 = work_order.price3
-    # quantity1 = work_order.quantity1
-    # quantity2 = work_order.quantity2
-    # quantity3 = work_order.quantity3
-    # sub1 = price1 * quantity1
-    # sub2 = price2 * quantity2
-    # sub3 = price3 * quantity3
-    # total = work_order.total_price
     if request.method == 'GET':
-        return render_template('pay.html', order_id=order_id, item1=item1, status1=status1,
+        return render_template('pay.html', order_id=order_id, part_id=part_id, item1=item1, status1=status1,
                                sentencing_time1=sentencing_time1, laser_scanner1=laser_scanner1)
     else:
         date_time = datetime.now()
@@ -122,7 +92,12 @@ def invoice():
     # 处理数据
     work_order = Order.query.order_by(Order.id.desc()).first()
     order_id = work_order.id
+    sale_order_id = work_order.sale_order_id
+    part_number_id = work_order.part_number_id
+    part_id = work_order.part_id
     item1 = work_order.item1
+    prepared_by = work_order.prepared_by
+    approved_by = work_order.approved_by
     status1 = work_order.status1
     sentencing_time1 = work_order.sentencing_time1
     laser_scanner1 = work_order.laser_scanner1
@@ -130,7 +105,7 @@ def invoice():
 
     if request.method == 'GET':
         factor = 1
-        return render_template('invoice_csv.html', order_id=order_id, item1=item1, status1=status1,
+        return render_template('invoice_csv.html', order_id=order_id, part_id=part_id, item1=item1, status1=status1,
                                sentencing_time1=sentencing_time1, verify_time1=verify_time1,
                                laser_scanner1=laser_scanner1, factor=factor)
     else:
@@ -167,7 +142,9 @@ def invoice():
 
         data = []
         data.append(data1)
-        data.append([order_id, item1, status1, laser_scanner1, sentencing_time1, verify_time1, final_time1])
+        data.append(
+            [order_id, sale_order_id, part_number_id, part_id, item1, prepared_by, approved_by, status1, laser_scanner1,
+             sentencing_time1, verify_time1, final_time1])
         # if quantity1 != 0:
         #     data.append([order_id, item1, price1, quantity1, sub1])
         # if quantity2 != 0:
@@ -187,18 +164,6 @@ def invoice():
 
         return render_template('invoice_csv.html', invoice_file=invoice_file, factor=factor)
 
-    # item2 = work_order.item2
-    # item3 = work_order.item3
-    # price1 = work_order.price1
-    # price2 = work_order.price2
-    # price3 = work_order.price3
-    # quantity1 = work_order.quantity1
-    # quantity2 = work_order.quantity2
-    # quantity3 = work_order.quantity3
-    # sub1 = price1 * quantity1
-    # sub2 = price2 * quantity2
-    # sub3 = price3 * quantity3
-    # total = work_order.total_price
 
 
 @bp.route('/overwrite_invoice', methods=['GET', 'POST'])

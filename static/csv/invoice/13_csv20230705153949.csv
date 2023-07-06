@@ -1,1 +1,2 @@
 ﻿id,sale_order_id,part_number_id,part_id,item1,prepared_by,approved_by,status1,laser_scanner1,sentencing_time1,verify_time1,final_time1
+13,s123,p123,i123,part1,John,John1,final_inspection,RulerX 10,2023-07-05 15:15:30,2023-07-05 15:34:58,2023-07-05 15:39:49
